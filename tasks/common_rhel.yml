@@ -10,9 +10,7 @@
         state: present
         username: "{{ rhn_username }}"
         password: "{{ rhn_password }}"
-        autosubscribe: true
-
-    - name: Attach to pool
-      command: subscription-manager attach --pool="{{ rh_poolid }}"
+        autosubscribe: no
+        pool_ids: "{{ rh_poolid }}"
+      when: rhsm_subscribe_host|bool
       ignore_errors: yes
-  when: rhsm_subscribe_host|bool
