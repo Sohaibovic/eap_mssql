@@ -1,2 +1,2 @@
 ---
-# defaults file for eap_mssql
+rhsm_subscribe_host: yes 
