@@ -3,7 +3,7 @@
   block:
     - name: Check Pool ID definition
       fail: msg="Extra variable rh_poolid has not been defined. Please add it before running this playbook"
-      when: rh_poolid is not defined
+      when: rhsm_subscribe_host and rh_poolid is not defined
 
     - name: Subscribe the host
       redhat_subscription:
