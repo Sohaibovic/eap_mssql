@@ -91,6 +91,11 @@
       MSSQL_PID: express
   no_log: False 
 
+- name: Start MS-SQL
+  systemd:
+    name: mssql-server
+    state: started
+
 - name: List DBs
   command:  /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'SELECT Name from sys.Databases;' 
   register: sql_db_list
