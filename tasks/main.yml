@@ -100,7 +100,7 @@
   command:  /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'SELECT Name from sys.Databases;' 
   register: sql_db_list
   changed_when: False 
-  until: sql_db_list == 0
+  until: sql_db_list.rc == 0
   retries: 5
   delay: 10
 
