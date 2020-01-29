@@ -96,20 +96,20 @@
     name: mssql-server
     state: started
 
-- name: List DBs
-  command:  /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'SELECT Name from sys.Databases;' 
-  register: sql_db_list
-  changed_when: False 
-  no_log: False
+# - name: List DBs
+#   command:  /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'SELECT Name from sys.Databases;' 
+#   register: sql_db_list
+#   changed_when: False 
+#   no_log: False
 
-- name: Check if monolith DB is present
-  set_fact: 
-    monolith_defined: "{{ sql_db_list.stdout_lines | select('match', db_name) | list }}"
-  no_log: True
+# - name: Check if monolith DB is present
+#   set_fact: 
+#     monolith_defined: "{{ sql_db_list.stdout_lines | select('match', db_name) | list }}"
+#   no_log: True
 
 - name: Create the monolith DB if needed
   command: /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P {{ sql_sa_password | quote }} -Q 'CREATE DATABASE {{ db_name | quote }};' 
-  when: monolith_defined.0 is not defined
+#  when: monolith_defined.0 is not defined
 
 - name: Display SA Password
   debug:
